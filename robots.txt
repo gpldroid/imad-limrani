@@ -35,13 +35,13 @@ Crawl-delay: 5
 
 # محركات البحث التي نريد حظرها
 User-agent: AhrefsBot
-Disallow: /
+Allow: /
 
 User-agent: SemrushBot
-Disallow: /
+Allow: /
 
 User-agent: MJ12bot
-Disallow: /
+Allow: /
 
 User-agent: DotBot
-Disallow: /
+Allow: /
