@@ -1,0 +1,47 @@
+# ملف robots.txt لمدونة العرائش التقنية
+# تم الإنشاء بواسطة: عماد الدين لمراني
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*?*
+
+# روابط موقع Sitemap
+Sitemap: https://gpldroid.github.io/sitemap.xml
+Sitemap: https://gpldroid.github.io/sitemap-posts.xml
+
+# محركات البحث المفضلة
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 5
+
+# محركات البحث التي نريد حظرها
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
