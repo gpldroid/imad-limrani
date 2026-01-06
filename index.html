@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة العرائش التقنية | بوابة الاحتراف</title>
+    <meta name="google-site-verification" content="Vwml0nQwz_EW-uw9FYDogWkYbNQ0WAxS9b_CcGmFs0Q" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- لوحة الألوان الجديدة (جذابة وعصرية) --- */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --main-color: #6366f1;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-dim: #64748b;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --footer-bg: #1e293b;
+            --footer-text: #94a3b8;
+        }
+
+        .dark-mode {
+            --bg-body: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --header-bg: rgba(30, 41, 59, 0.9);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            --footer-bg: #0f172a;
+            --footer-text: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* --- الهيدر الزجاجي --- */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+            padding: 12px 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 22px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #theme-toggle {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Cairo';
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- شريط الأخبار (تم ضبط السرعة) --- */
+        .breaking-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 45px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .bn-label {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .bn-content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+        }
+
+        .bn-text {
+            position: absolute;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+            padding-right: 100%;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 45px;
+        }
+
+        .bn-content:hover .bn-text {
+            animation-play-state: paused;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* --- السلايدر (تصميم البطاقات العائمة) --- */
+        .slider-wrapper {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .slider-grid {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scrollbar-width: none;
+        }
+
+        .slider-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-item {
+            min-width: 280px;
+            height: 350px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .slider-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .slider-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .slider-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .slider-overlay h4 {
+            margin: 0;
+            color: white;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* --- الشبكة الرئيسية --- */
+        .main-layout {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .section-header span {
+            width: 35px;
+            height: 5px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        /* كروت المقالات */
+        .post-card {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            border: 1px solid rgba(100, 116, 139, 0.05);
+        }
+
+        .post-card:hover {
+            border-color: var(--main-color);
+            transform: translateY(-5px);
+        }
+
+        .post-card img {
+            width: 260px;
+            height: 180px;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .post-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .post-content {
+            padding: 25px;
+            flex: 1;
+        }
+
+        .post-content h3 {
+            margin: 0 0 12px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .post-content h3 a {
+            text-decoration: none;
+            color: var(--text-main);
+            transition: 0.3s;
+        }
+
+        .post-content h3 a:hover {
+            color: var(--main-color);
+        }
+
+        .post-content p {
+            color: var(--text-dim);
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* السايد بار */
+        .sidebar-widget {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-widget h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--main-color);
+            padding: 6px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .tag:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* زر تحميل المزيد */
+        .load-more-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 15px;
+            font-family: 'Cairo';
+            font-weight: 700;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+            transition: 0.3s;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* مؤشر التحميل */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(99, 102, 241, 0.3);
+            border-top-color: var(--main-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            margin-top: 60px;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .footer-about p {
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4, .footer-contact h4, .footer-social h4 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h4:after, .footer-contact h4:after, .footer-social h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--footer-text);
+        }
+
+        .copyright a {
+            color: var(--main-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+
+        .creator {
+            color: white;
+            font-weight: 600;
+            background: var(--primary-gradient);
+            padding: 3px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 850px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .post-card {
+                flex-direction: column;
+            }
+            
+            .post-card img {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .slider-item {
+                min-width: 250px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slider-item {
+                min-width: 200px;
+                height: 250px;
+            }
+            
+            .bn-label {
+                padding: 0 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a href="/" class="logo">العرائش التقنية.</a>
+        <button id="theme-toggle">الوضع الليلي 🌙</button>
+    </div>
+</header>
+
+<div class="main-content">
+    <div class="breaking-container">
+        <div class="bn-label">الأخبار</div>
+        <div class="bn-content">
+            <div class="bn-text" id="ticker-text">تحميل آخر المستجدات...</div>
+        </div>
+    </div>
+
+    <div class="slider-wrapper">
+        <div class="section-header"><span></span><h2>مواضيع مميزة</h2></div>
+        <div class="slider-grid" id="main-slider"></div>
+    </div>
+
+    <div class="main-layout">
+        <main>
+            <div class="section-header"><span></span><h2>أحدث المقالات</h2></div>
+            <div id="posts-container"></div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>جاري تحميل المزيد من المقالات...</p>
+            </div>
+            <button class="load-more-btn" id="load-more-btn" onclick="nextPage()">اكتشف المزيد</button>
+        </main>
+
+        <aside>
+            <div class="sidebar-widget">
+                <h3>الأقسام</h3>
+                <div id="sidebar-labels" class="tag-cloud"></div>
+            </div>
+            <div class="sidebar-widget">
+                <h3>اشترك معنا</h3>
+                <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 15px;">كن أول من يتلقى التحديثات التقنية مباشرة.</p>
+                <button onclick="alert('سيتم إضافة نموذج الاشتراك قريباً!')" style="background: var(--primary-gradient); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; font-weight: 600; width: 100%;">اشترك الآن</button>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <a href="/" class="footer-logo">العرائش التقنية.</a>
+                <p>مدونة تقنية متخصصة في تقديم آخر المستجدات والشروحات التقنية، نهدف إلى رفع مستوى المعرفة التقنية في العالم العربي.</p>
+                <p>نقدم محتوى عالي الجودة يشمل البرمجة، الأمن السيبراني، التصميم، وأحدث التقنيات العالمية.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الصفحة الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> عن المدونة</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> المقالات</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> الشروحات</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-left"></i> اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>معلومات الاتصال</h4>
+                <p><i class="fas fa-map-marker-alt"></i> العرائش، المغرب</p>
+                <p><i class="fas fa-envelope"></i> info@larache-tech.com</p>
+                <p><i class="fas fa-phone"></i> +212 600-000000</p>
+                <p><i class="fas fa-clock"></i> متاحون 24/7 للرد على استفساراتكم</p>
+            </div>
+            
+            <div class="footer-social">
+                <h4>تابعنا على</h4>
+                <p>ابق على اطلاع بآخر تحديثاتنا عبر وسائل التواصل الاجتماعي.</p>
+                <div class="social-icons">
+                    <a href="#" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="تويتر"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="انستغرام"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="تليجرام"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة © <span id="current-year">2024</span> مدونة العرائش التقنية. 
+            <br>تم التصميم والبرمجة بواسطة <span class="creator">عماد الدين لمراني</span> | 
+            <a href="#">سياسة الخصوصية</a> | <a href="#">شروط الاستخدام</a></p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const blogUrl = "https://greatxenforo.blogspot.com";
+    let startIndex = 1;
+    let maxResults = 8;
+    let tickerContent = "";
+
+    // تحديث سنة حقوق النشر تلقائياً
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // التحقق من تفضيلات الوضع المظلم
+    function checkDarkModePreference() {
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            document.getElementById('theme-toggle').textContent = 'الوضع النهاري ☀️';
+        }
+    }
+
+    // تبديل الوضع المظلم
+    function toggleDarkMode() {
+        const isDark = document.body.classList.toggle('dark-mode');
+        const button = document.getElementById('theme-toggle');
+        
+        if (isDark) {
+            button.textContent = 'الوضع النهاري ☀️';
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            button.textContent = 'الوضع الليلي 🌙';
+            localStorage.setItem('darkMode', 'false');
+        }
+    }
+
+    // جلب المقالات
+    function fetchPosts() {
+        const loading = document.getElementById('loading');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        
+        loading.classList.add('active');
+        loadMoreBtn.disabled = true;
+        
+        const script = document.createElement('script');
+        script.src = `${blogUrl}/feeds/posts/summary?alt=json-in-script&start-index=${startIndex}&max-results=${maxResults}&callback=displayPosts`;
+        script.onerror = () => {
+            loading.classList.remove('active');
+            loadMoreBtn.disabled = false;
+            document.getElementById('posts-container').innerHTML += '<p style="text-align:center;color:var(--text-dim);">حدث خطأ في تحميل المقالات. يرجى المحاولة مرة أخرى.</p>';
+        };
+        document.body.appendChild(script);
+    }
+
+    // عرض المقالات
+    function displayPosts(json) {
+        const container = document.getElementById('posts-container');
+        const loading = document.getElementById('loading');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const ticker = document.getElementById('ticker-text');
+        
+        loading.classList.remove('active');
+        loadMoreBtn.disabled = false;
+        
+        if (!json.feed.entry) {
+            loadMoreBtn.style.display = 'none';
+            container.innerHTML += '<p style="text-align:center;color:var(--text-dim);">لا توجد مقالات إضافية للعرض.</p>';
+            return;
+        }
+
+        json.feed.entry.forEach(entry => {
+            const title = entry.title.$t;
+            const link = entry.link.find(l => l.rel === 'alternate').href;
+            const summary = entry.summary ? entry.summary.$t.substring(0, 130) + '...' : 'لا يوجد ملخص متوفر لهذه المقالة.';
+            
+            // الحصول على صورة المقالة أو استخدام صورة افتراضية
+            let img = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80';
+            if (entry.media$thumbnail) {
+                img = entry.media$thumbnail.url.replace('/s72-c/', '/s600/');
+            }
+            
+            tickerContent += ` • ${title} `;
+            
+            container.innerHTML += `
+                <article class="post-card">
+                    <img src="${img}" alt="${title}" loading="lazy">
+                    <div class="post-content">
+                        <h3><a href="${link}" target="_blank">${title}</a></h3>
+                        <p>${summary}</p>
+                    </div>
+                </article>
+            `;
+        });
+        
+        // تحديث شريط الأخبار فقط عند التحميل الأول
+        if (startIndex === 1 && tickerContent) {
+            ticker.textContent = tickerContent + tickerContent; // التكرار لضمان استمرارية الحركة
+        }
+    }
+
+    // تحميل المزيد من المقالات
+    function nextPage() {
+        startIndex += maxResults;
+        fetchPosts();
+    }
+
+    // جلب المحتوى الإضافي (السلايدر والأقسام)
+    function fetchExtras() {
+        const script = document.createElement('script');
+        script.src = `${blogUrl}/feeds/posts/summary?alt=json-in-script&max-results=6&callback=displayExtras`;
+        script.onerror = () => {
+            document.getElementById('main-slider').innerHTML = '<p style="color:var(--text-dim);text-align:center;padding:40px;">لا يمكن تحميل المواضيع المميزة حالياً.</p>';
+            document.getElementById('sidebar-labels').innerHTML = '<p style="color:var(--text-dim);text-align:center;">لا توجد أقسام متاحة.</p>';
+        };
+        document.body.appendChild(script);
+    }
+
+    // عرض المحتوى الإضافي
+    function displayExtras(json) {
+        const slider = document.getElementById('main-slider');
+        const sidebar = document.getElementById('sidebar-labels');
+        
+        if (!json.feed.entry) return;
+        
+        json.feed.entry.forEach(entry => {
+            const title = entry.title.$t;
+            const link = entry.link.find(l => l.rel === 'alternate').href;
+            let img = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w-800&h=1000&q=80';
+            if (entry.media$thumbnail) {
+                img = entry.media$thumbnail.url.replace('/s72-c/', '/s800/');
+            }
+            
+            slider.innerHTML += `
+                <div class="slider-item">
+                    <img src="${img}" alt="${title}" loading="lazy">
+                    <div class="slider-overlay">
+                        <a href="${link}" target="_blank" style="text-decoration:none">
+                            <h4>${title}</h4>
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (json.feed.category) {
+            json.feed.category.forEach(cat => {
+                sidebar.innerHTML += `<a href="${blogUrl}/search/label/${encodeURIComponent(cat.term)}" class="tag" target="_blank">${cat.term}</a>`;
+            });
+        } else {
+            sidebar.innerHTML = '<p style="color:var(--text-dim);text-align:center;">لا توجد أقسام متاحة.</p>';
+        }
+    }
+
+    // إضافة تأثيرات للروابط في الفوتر
+    function initFooterLinks() {
+        const footerLinks = document.querySelectorAll('.footer-links a');
+        footerLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.color = '#a855f7';
+            });
+            link.addEventListener('mouseleave', function() {
+                this.style.color = '';
+            });
+        });
+    }
+
+    // تهيئة الموقع عند التحميل
+    window.onload = function() {
+        checkDarkModePreference();
+        fetchPosts();
+        fetchExtras();
+        initFooterLinks();
+        
+        // إضافة حدث النقر لزر الوضع المظلم
+        document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
+        
+        // إضافة تأثيرات للروابط عند تحميل الصفحة
+        setTimeout(() => {
+            const cards = document.querySelectorAll('.post-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeInUp 0.5s ease forwards';
+            });
+        }, 100);
+    };
+
+    // إضافة أنماط للحركات
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+</body>
+</html>
