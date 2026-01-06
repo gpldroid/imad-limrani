@@ -13,8 +13,8 @@ Disallow: /*.css$
 Disallow: /*?*
 
 # روابط موقع Sitemap
-Sitemap: https://gpldroid.github.io/sitemap.xml
-Sitemap: https://gpldroid.github.io/sitemap-posts.xml
+Sitemap: https://gpldroid.github.io/imad-limrani/sitemap.xml
+Sitemap: https://gpldroid.github.io/imad-limrani/sitemap-posts.xml
 
 # محركات البحث المفضلة
 User-agent: Googlebot
